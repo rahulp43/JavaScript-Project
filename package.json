@@ -1,0 +1,31 @@
+{
+  "name": "javascript-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "cucumber": "cucumber-js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rahulp43/JavaScript-Project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/rahulp43/JavaScript-Project/issues"
+  },
+  "homepage": "https://github.com/rahulp43/JavaScript-Project#readme",
+  "dependencies": {
+    "chromedriver": "^143.0.3",
+    "selenium-webdriver": "^4.39.0"
+  },
+  "devDependencies": {
+    "@cucumber/cucumber": "^12.5.0",
+    "chai": "^6.2.2",
+    "cucumber-js": "^1.0.0",
+    "npx": "^3.0.0"
+  }
+}
