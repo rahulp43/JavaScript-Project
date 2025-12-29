@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "cucumber": "cucumber-js"
+    "cucumber": "cucumber-js",
+    "cucumber:json": "cucumber-js --format json:reports/latest.json",
+    "report:generate": "node report/generate-report.js",
+    "cucumber:ci": "npm run cucumber:json && npm run report:generate"
   },
   "repository": {
     "type": "git",
@@ -25,6 +28,7 @@
   "devDependencies": {
     "@cucumber/cucumber": "^12.5.0",
     "chai": "^6.2.2",
+    "cucumber-html-reporter": "^5.5.1",
     "cucumber-js": "^1.0.0",
     "npx": "^3.0.0"
   }

@@ -51,7 +51,32 @@ class TestBase {
 
         try {
           console.log('Starting WebDriver session for', browser);
-          this.driver = await new Builder().forBrowser(browser).build();
+
+          // build with browser-specific options (Chrome options supported)
+          let builder = new Builder().forBrowser(browser);
+          if (browser === 'chrome') {
+            const options = new chrome.Options();
+            const headless = (process.env.HEADLESS || 'false').toLowerCase() === 'true';
+            options.addArguments('--remote-allow-origins=*');
+            options.addArguments('--disable-notifications');
+            options.addArguments('--window-size=1920,1080');
+            // reduce noisy Google/Chrome background services logs and disable updates
+            options.addArguments('--disable-background-networking');
+            options.addArguments('--disable-sync');
+            options.addArguments('--no-first-run');
+            options.addArguments('--disable-extensions');
+            options.addArguments('--disable-component-update');
+            options.addArguments('--disable-background-timer-throttling');
+            options.addArguments('--disable-client-side-phishing-detection');
+            options.addArguments('--disable-default-apps');
+            if (headless) {
+              options.addArguments('--headless=new');
+              options.addArguments('--disable-gpu');
+            }
+            builder = builder.setChromeOptions(options);
+          }
+
+          this.driver = await builder.build();
           console.log('WebDriver session created');
         } catch (e) {
           console.error('Failed to start WebDriver session:', e && e.message);

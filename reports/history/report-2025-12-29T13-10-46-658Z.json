@@ -1,0 +1,211 @@
+[
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "login-to-activecontrol;login-with-valid-credentials",
+        "keyword": "Scenario",
+        "line": 3,
+        "name": "Login with valid credentials",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 704499
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "the login panel is displayed",
+            "match": {
+              "location": "features\\step_definitions\\LoginPageSteps.js:14"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 7193539399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 5,
+            "name": "the user logs on with valid credentials \"ADMINRAHUL\" \"@admin\"",
+            "match": {
+              "location": "features\\step_definitions\\LoginPageSteps.js:44"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2398789098
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 6,
+            "name": "the Dashboard profile displays user initials \"A\"",
+            "match": {
+              "location": "features\\step_definitions\\LoginPageSteps.js:65"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 139312299
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 1029199
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "login-to-activecontrol;login-with-invalid-username",
+        "keyword": "Scenario",
+        "line": 8,
+        "name": "Login with invalid username",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 489499
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 9,
+            "name": "the login panel is displayed",
+            "match": {
+              "location": "features\\step_definitions\\LoginPageSteps.js:14"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 6875203899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 10,
+            "name": "the user logs on with invalid username \"invalid\" \"invalidpass\"",
+            "match": {
+              "location": "features\\step_definitions\\LoginPageSteps.js:51"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 15444627899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 11,
+            "name": "Alert displays message \"Could not authenticate. Please log in again.\"",
+            "match": {
+              "location": "features\\step_definitions\\LoginPageSteps.js:90"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 48210600
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 260999
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "login-to-activecontrol;login-with-invalid-password",
+        "keyword": "Scenario",
+        "line": 13,
+        "name": "Login with invalid password",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 237500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 14,
+            "name": "the login panel is displayed",
+            "match": {
+              "location": "features\\step_definitions\\LoginPageSteps.js:14"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 6852746599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 15,
+            "name": "the user logs on with invalid password \"auto-sapall\" \"invalid\"",
+            "match": {
+              "location": "features\\step_definitions\\LoginPageSteps.js:58"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 15440589399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 16,
+            "name": "Alert displays message \"Could not authenticate. Please log in again.\"",
+            "match": {
+              "location": "features\\step_definitions\\LoginPageSteps.js:90"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 37406298
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 278200
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "login-to-activecontrol",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Login to ActiveControl",
+    "tags": [],
+    "uri": "features\\LoginPage.feature"
+  }
+]

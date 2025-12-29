@@ -15,7 +15,7 @@ class Hooks {
       console.log("Before Hook Method Running....");
       const browser = process.env.browser || 'chrome';
       //url is set on cmd-line
-            await this.testBase.browserInitialization(process.env.BASE_URL);
+      // await this.testBase.browserInitialization(process.env.BASE_URL);
     }
     
     async tearDown(scenario)
