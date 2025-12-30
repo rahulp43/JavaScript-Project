@@ -15,20 +15,19 @@ class LoginPage {
     this.passwordField = By.css("input[id*='password-inner']");
     this.loginButton = By.css("button[id$='login']");
     this.acText = By.xpath("//span[text()='ActiveControl']");
-    this.errorMessage = By.xpath("//div[contains(@id, 'error')]//span[contains(@id,'text')]"); // adjust to your real locator
+    this.errorMessage = By.xpath("//div[contains(@id, 'error')]//span[contains(@id,'text')]");
   }
 
-  // ===== helper: select an option from a dropdown-like system selector =====
-  async selectSystemOption(systemName) {
-    if (!systemName) return;
-    await this.driver.wait(until.elementLocated(this.system), 10000);
-    const select = await this.driver.findElement(this.system);
-    await select.click();
-    // adjust the xpath below to match your actual option elements
-    await select.findElement(By.xpath("//li[contains(@id,'system-2')]")).click();
-  }
+  //===== select an option from a dropdown-like system selector =====
+  // async selectSystemOption(systemName) {
+  //   if (!systemName) return;
+  //   await this.driver.wait(until.elementLocated(this.system), 10000);
+  //   const select = await this.driver.findElement(this.system);
+  //   await select.click();
+  //   await select.findElement(By.xpath("//li[contains(@id,'system-2')]")).click();
+  // }
 
-  // ===== helper to map field name -> By (Java: getBy(String name)) =====
+  // ===== to map field name -> getBy(String name))=====
   getBy(name) {
     let by = null;
 
@@ -61,7 +60,7 @@ class LoginPage {
     return by;
   }
 
-  // ===== method: attempt login with given credentials (Java: enterCredentialsLogin) =====
+  // ===== attempt login with given credentials =====
   async enterCredentialsAndLogin(...args) {
     // supports either (username, password) OR (systemName, username, password)
     let systemName = null;
@@ -77,23 +76,6 @@ class LoginPage {
     }
 
     console.log(`Attempting login with system=${systemName}, username=${username}`);
-
-    // if a system selector was provided, try to set it but skip if not interactable
-    // if (systemName != null) {
-    //   try {
-    //     await this.driver.wait(until.elementLocated(this.system), 5000);
-    //     const sysEl = await this.driver.findElement(this.system);
-    //     const isDisplayed = await sysEl.isDisplayed().catch(() => false);
-    //     const isEnabled = await sysEl.isEnabled().catch(() => false);
-    //     if (isDisplayed && isEnabled) {
-    //       await sysEl.sendKeys(String(systemName));
-    //     } else {
-    //       console.warn('System selector found but not interactable; skipping setting system');
-    //     }
-    //   } catch (e) {
-    //     console.warn('System selector not present or could not be set:', e.message);
-    //   }
-    // }
 
     if (!username) throw new Error('username is required');
     if (!password) throw new Error('password is required');
@@ -125,7 +107,7 @@ class LoginPage {
     }
   }
 
-  // ===== method: isOnPage() (Java: isOnPage) =====
+  // ===== isOnPage() =====
   async isOnPage() {
     try {
       // first try the header
@@ -142,7 +124,7 @@ class LoginPage {
     }
   }
 
-  // ===== method: getLoginErrorMsg() (Java: getLoginMsgError) =====
+  // ===== getLoginErrorMsg() =====
   async getLoginErrorMessage() {
     await this.driver.wait(until.elementLocated(this.errorMessage), 10000);
     const el = await this.driver.findElement(this.errorMessage);

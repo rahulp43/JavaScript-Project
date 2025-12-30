@@ -1,35 +1,31 @@
 const { Given, When, Then } = require('@cucumber/cucumber');
 const { expect } = require('chai');
-const TestBase = require('../../TestBase');
-const LoginPage = require('../../LoginPage');
+const TestBase = require('../../Basepage/TestBase');
+const LoginPage = require('../../pages/LoginPage');
 const { By, until } = require('selenium-webdriver');
 const { setDefaultTimeout } = require('@cucumber/cucumber');
 
-setDefaultTimeout(60*1000);
+setDefaultTimeout(60 * 1000);
 
-let testBase;
-let login;
+// testBase and login will be stored on the Cucumber World (`this`)
 console.log('Started');
 
 Given("the login panel is displayed", async function () {
-  testBase = new TestBase();
-  // If you want to hardcode the app URL for local runs, change the fallback below.
-  // const baseUrl = process.env.BASE_URL || 'https://webplatformregression.basistechnologies.info/dashboard/#/QRE';
-  // const baseUrl = process.env.BASE_URL || 'https://acpg2.bti.local/dashboard/';
+  this.testBase = new TestBase();
   const baseUrl = process.env.BASE_URL || 'https://webplatform-dev.basistechnologies.info/dashboard/#/TQM';
   try {
     console.log('Initializing browser and navigating to', baseUrl);
-    await testBase.browserInitialization(baseUrl);
+    await this.testBase.browserInitialization(baseUrl);
     console.log('Browser initialization completed');
-    login = new LoginPage(testBase.getDriver());
-    const onPage = await login.isOnPage();
+    this.login = new LoginPage(this.testBase.getDriver());
+    const onPage = await this.login.isOnPage();
     expect(onPage).to.be.true;
   } catch (err) {
     console.error('Error in Given step - browser init or page load failed:', err && err.message);
     // attempt to capture a screenshot if driver exists
     try {
-      if (testBase && testBase.captureBase64Screenshot) {
-        const shot = await testBase.captureBase64Screenshot();
+      if (this.testBase && this.testBase.captureBase64Screenshot) {
+        const shot = await this.testBase.captureBase64Screenshot();
         const fs = require('fs');
         fs.writeFileSync('last_error_screenshot.png', Buffer.from(shot, 'base64'));
         console.log('Saved last_error_screenshot.png');
@@ -44,28 +40,28 @@ Given("the login panel is displayed", async function () {
 When(
   'the user logs on with valid credentials {string} {string}',
   async function (username, password) {
-    await login.enterCredentialsAndLogin(username, password);
+    await this.login.enterCredentialsAndLogin(username, password);
   }
 );
 
 When(
   'the user logs on with invalid username {string} {string}',
   async function (username, password) {
-    await login.enterCredentialsAndLogin(username, password);
+    await this.login.enterCredentialsAndLogin(username, password);
   }
 );
 
 When(
   'the user logs on with invalid password {string} {string}',
   async function (username, password) {
-    await login.enterCredentialsAndLogin(username, password);
+    await this.login.enterCredentialsAndLogin(username, password);
   }
 );
 
 Then(
   'the Dashboard profile displays user initials {string}',
   async function (expected) {
-    const driver = (login && login.driver) ? login.driver : (testBase && testBase.getDriver ? testBase.getDriver() : null);
+    const driver = (this.login && this.login.driver) ? this.login.driver : (this.testBase && this.testBase.getDriver ? this.testBase.getDriver() : null);
     if (!driver) throw new Error('WebDriver not available to verify initials');
 
     const xpath = `//*[contains(normalize-space(string(.)), '${expected}')]`;
@@ -75,7 +71,7 @@ Then(
       const actual = await el.getText();
       expect(actual).to.contain(expected);
     } catch (e) {
-      // fallback: check body text
+      // check body text
       try {
         const body = await driver.findElement(By.css('body'));
         const bodyText = await body.getText();
@@ -88,6 +84,6 @@ Then(
 );
 
 Then('Alert displays message {string}', async function (expectedMsg) {
-  const actual = await login.getLoginErrorMessage();
+  const actual = await this.login.getLoginErrorMessage();
   expect(actual).to.contain(expectedMsg);
 });
